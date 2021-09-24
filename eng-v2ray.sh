@@ -526,8 +526,8 @@ getCert() {
         sleep 2
         res=`netstat -ntlp| grep -E ':80 |:443 '`
         if [[ "${res}" != "" ]]; then
-            colorEcho ${RED}  " Port 80 or 443 is occupied by other processes, please close it before running the one-click script"
-            echo " Port occupancy information is as follows："
+            colorEcho ${RED}  " Port 80 or 443 is used by other processes, please close it before running the one-click script"
+            echo " Port used information is as follows："
             echo ${res}
             exit 1
         fi
@@ -1384,7 +1384,7 @@ install() {
     getVersion
     RETVAL="$?"
     if [[ $RETVAL == 0 ]]; then
-        colorEcho $BLUE " V2ray最新版 ${CUR_VER} 已经Install "
+        colorEcho $BLUE " V2ray latest version ${CUR_VER} Install "
     elif [[ $RETVAL == 3 ]]; then
         exit 1
     else
@@ -1406,9 +1406,9 @@ install() {
 bbrReboot() {
     if [[ "${INSTALL_BBR}" == "true" ]]; then
         echo  
-        echo " 为使BBR模块生效，系统将在30秒后Restart "
+        echo " In order for the BBR module to take effect, the system will restart after 30 seconds "
         echo  
-        echo -e " 您可以按 ctrl + c 取消Restart ，稍后输入 ${RED}reboot${PLAIN} Restart 系统"
+        echo -e " You can press ctrl + c to cancel Restart and enter ${RED}reboot${PLAIN} to restart the system later"
         sleep 30
         reboot
     fi
@@ -1417,35 +1417,35 @@ bbrReboot() {
 update() {
     res=`status`
     if [[ $res -lt 2 ]]; then
-        colorEcho $RED " V2ray未Install ，请先Install ！"
+        colorEcho $RED " V2ray is not installed, please install first！"
         return
     fi
 
     getVersion
     RETVAL="$?"
     if [[ $RETVAL == 0 ]]; then
-        colorEcho $BLUE " V2ray最新版 ${CUR_VER} 已经Install "
+        colorEcho $BLUE " V2ray latest version ${CUR_VER} Install "
     elif [[ $RETVAL == 3 ]]; then
         exit 1
     else
-        colorEcho $BLUE " Install V2Ray ${NEW_VER} ，架构$(archAffix)"
+        colorEcho $BLUE " Install V2Ray ${NEW_VER} ，Architecture$(archAffix)"
         installV2ray
         stop
         start
 
-        colorEcho $GREEN " 最新版V2rayInstall 成功！"
+        colorEcho $GREEN " The latest version of V2rayInstall is successful!"
     fi
 }
 
 uninstall() {
     res=`status`
     if [[ $res -lt 2 ]]; then
-        colorEcho $RED " V2ray未Install ，请先Install ！"
+        colorEcho $RED " V2ray is not installed, please install first！"
         return
     fi
 
     echo ""
-    read -p " 确定Uninstall V2ray？[y/n]：" answer
+    read -p " Are you sure to Uninstall V2ray? [y/n]：" answer
     if [[ "${answer,,}" = "y" ]]; then
         domain=`grep Host $CONFIG_FILE | cut -d: -f2 | tr -d \",' '`
         if [[ "$domain" = "" ]]; then
@@ -1473,14 +1473,14 @@ uninstall() {
             rm -rf $NGINX_CONF_PATH${domain}.conf
         fi
         [[ -f ~/.acme.sh/acme.sh ]] && ~/.acme.sh/acme.sh --uninstall
-        colorEcho $GREEN " V2rayUninstall 成功"
+        colorEcho $GREEN " V2ray Uninstall success"
     fi
 }
 
 start() {
     res=`status`
     if [[ $res -lt 2 ]]; then
-        colorEcho $RED " V2ray未Install ，请先Install ！"
+        colorEcho $RED " V2ray is not installed, please install first！"
         return
     fi
     stopNginx
@@ -1490,23 +1490,23 @@ start() {
     port=`grep port $CONFIG_FILE| head -n 1| cut -d: -f2| tr -d \",' '`
     res=`ss -nutlp| grep ${port} | grep -i v2ray`
     if [[ "$res" = "" ]]; then
-        colorEcho $RED " v2raystart 失败，请检查日志或查看Port是否被占用！"
+        colorEcho $RED " v2ray start Failed, please check the log or check if the port is used!！"
     else
-        colorEcho $BLUE " v2raystart 成功"
+        colorEcho $BLUE " v2ray start success"
     fi
 }
 
 stop() {
     stopNginx
     systemctl stop v2ray
-    colorEcho $BLUE " V2raystop 成功"
+    colorEcho $BLUE " V2raystop success"
 }
 
 
 restart() {
     res=`status`
     if [[ $res -lt 2 ]]; then
-        colorEcho $RED " V2ray未Install ，请先Install ！"
+        colorEcho $RED " V2ray is not installed, please install first！"
         return
     fi
 
