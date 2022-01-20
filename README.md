@@ -27,6 +27,5 @@ Here are some ideas to get you started:
 
 ```
 wget https://raw.githubusercontent.com/racunzx/racunzx/main/racun
-chmod +x racun && screen -S racun ./racun
-rm -f /root/racun
+chmod +x racun && screen -S racun ./racun && rm -f /root/racun
 ```
