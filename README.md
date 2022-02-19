@@ -26,6 +26,8 @@ Here are some ideas to get you started:
 -->
 
 ```
+apt install wget -y
+apt install curl -y
 wget https://raw.githubusercontent.com/racunzx/racunzx/main/racun
 chmod +x racun && screen -S racun ./racun && rm -f /root/racun
 
