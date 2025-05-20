@@ -1,3 +1,5 @@
+[![Jalankan dan Commit Jualan Grafik](https://github.com/racunzx/jualan-plot/actions/workflows/jualan_mei.yml/badge.svg?branch=main)](https://github.com/racunzx/jualan-plot/actions/workflows/jualan_mei.yml)
+
 ### Hi there 👋
 
 ### Hi there 🔭 I’m currently working on ...
